@@ -11,16 +11,8 @@ MainGame::MainGame()
 void MainGame::init()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
-	window = SDL_CreateWindow("GAAA", SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
-	//es validar si hubo un error
-	SDL_GLContext glContext = SDL_GL_CreateContext(window);
-	GLenum error = glewInit();
-	if (error != GLEW_OK) {
-		//falta validar el estado del glew
-	}
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	window = new Window();
+	window->create("Motor WD2M", width, height, 0);
 	initShaders();
 }
 
@@ -30,6 +22,7 @@ void MainGame::initShaders()
 		"Shaders/colorShaderFrag.txt");
 	program.addAtribute("vertexPosition");
 	program.addAtribute("vertexColor");
+	program.addAtribute("vertexUV");
 	program.linkShader();
 
 
@@ -45,8 +38,8 @@ void MainGame::draw()
 	time += 0.002;
 	sprite.draw();
 	if (topRightSpriteShown) {
-        topRightSprite.draw(); // Dibuja el nuevo sprite
-    }
+		topRightSprite.draw();
+	}
 	if (topLeftSpriteShown) {
 		topLeftSprite.draw();
 	}
@@ -54,7 +47,7 @@ void MainGame::draw()
 		bottomRightSprite.draw();
 	}
 	program.unuse();
-	SDL_GL_SwapWindow(window);
+	window->swapWindow();
 }
 
 void MainGame::run()
@@ -62,13 +55,12 @@ void MainGame::run()
 	init();
 
 	startTime = SDL_GetTicks();
-	sprite.init(-1, -1, 1, 1);
-	topRightSprite.init(1, 1, -1, -1);
+	sprite.init(-1, -1, 1, 1, "Images/mario.png");
+	topRightSprite.init(1, 1, -1, -1, "Images/red.png");
 
 	// Inicializamos los nuevos sprites sin mostrarlos inmediatamente
-	topLeftSprite.init(-1, 1, 1, -1); // Ajusta las coordenadas según sea necesario
-	bottomRightSprite.init(1, -1, -1, 1); // Ajusta las coordenadas según sea necesario
-
+	topLeftSprite.init(-1, 1, 1, -1, "Images/link.png"); // Ajusta las coordenadas según sea necesario
+	bottomRightSprite.init(1, -1, -1, 1, "Images/pikachu.png"); // Ajusta las coordenadas según sea necesario
 	update();
 }
 
@@ -94,7 +86,7 @@ void MainGame::update()
 			bottomRightSpriteShown = true;
 		}
 
-		draw(); // Dibuja la escena
+		draw();
 	}
 }
 

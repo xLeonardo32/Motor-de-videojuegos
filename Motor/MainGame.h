@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Sprite.h"
 #include "GLS_Program.h"
+#include "Window.h"
 using namespace std;
 enum class GameState {
 	PLAY, EXIT
@@ -22,7 +23,7 @@ private:
 	bool bottomRightSpriteShown = false;
 	int width;
 	int height;
-	SDL_Window* window;
+	Window* window;
 	void init();
 	void processInput();
 	GLS_Program program;
