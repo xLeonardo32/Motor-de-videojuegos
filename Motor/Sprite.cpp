@@ -3,6 +3,9 @@
 #include <cstddef>
 #include "ResourceManager.h"
 
+
+//branch llamada TA02
+//que hagas lo mismo que la TA01 pero con imagen
 Sprite::Sprite()
 {
 	vboID = 0;
@@ -23,10 +26,11 @@ void Sprite::init(float x, float y, int width, int height, string texturePath)
 	vertexData[1].setPosition(x, y + height);
 	vertexData[2].setPosition(x, y);
 	vertexData[3].setPosition(x, y);
-	vertexData[4].setPosition(x + width, y);
+	vertexData[4].setPosition(x+ width, y);
 	vertexData[5].setPosition(x + width, y + height);
 
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < 6; i++)
+	{
 		vertexData[i].setColor(255, 0, 0, 255);
 	}
 	vertexData[1].setColor(0, 0, 255, 255);
@@ -39,10 +43,9 @@ void Sprite::init(float x, float y, int width, int height, string texturePath)
 	vertexData[4].setUV(1.0f, 0.0f);
 	vertexData[5].setUV(1.0f, 1.0f);
 
-
 	glBindBuffer(GL_ARRAY_BUFFER, vboID);
 	glBufferData(GL_ARRAY_BUFFER, 
-		sizeof(vertexData), vertexData, GL_STATIC_DRAW);
+		sizeof(vertexData),vertexData, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 }
@@ -66,6 +69,7 @@ void Sprite::draw()
 	glDisableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
+
 
 Sprite::~Sprite()
 {

@@ -3,6 +3,6 @@
 
 struct GLTexture {
 	GLuint id;
-	int width;
-	int height;
+	float width;
+	float heigth;
 };

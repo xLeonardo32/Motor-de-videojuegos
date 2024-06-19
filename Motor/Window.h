@@ -2,7 +2,6 @@
 #include <SDL/SDL.h>
 #include <GL/glew.h>
 #include <string>
-
 using namespace std;
 enum WindowFlags {
 	INVISIBLE = 0x1,
@@ -19,13 +18,15 @@ private:
 public:
 	Window();
 	~Window();
-	int create(string windowName, int screenWidth, int screenHeight, int currentFlags);
+	int create(string windowName,
+		int screenWidth, int screenHeight, int currentFlags);
 	void swapWindow();
-	int getScreenWith() {
+	int getScreenWidth() {
 		return screenWidth;
 	}
 	int getScreenHeight() {
 		return screenHeight;
 	}
+
 };
 
